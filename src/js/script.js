@@ -1,4 +1,6 @@
-const BASE_URL = "https://pokeapi.co/api/v2/pokemon?limit=10";
+let limit = 20;
+let offset = 0;
+const BASE_URL = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`;
 
 function init() {
   fetchDataJson();
@@ -35,4 +37,9 @@ function generatePokemon(pokemon) {
         </div>
     </div>
       `;
+}
+
+function loadMore() {
+  limit += 20;
+  init();
 }
