@@ -11,12 +11,12 @@ async function fetchDataJson() {
 }
 
 async function showPokemon(pokemons) {
-  document.getElementById("content").innerHTML = "";
+  document.querySelector(".content").innerHTML = "";
 
   for (let i = 0; i < pokemons.length; i++) {
     const pokemon = pokemons[i];
     let pokemonDetails = await fetchPokemonDetails(pokemon.url);
-    document.getElementById("content").innerHTML +=
+    document.querySelector(".content").innerHTML +=
       generatePokemon(pokemonDetails);
   }
 }
