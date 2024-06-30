@@ -35,7 +35,7 @@ body {
     margin-top: 15px;
 }
 
-.load-more {
+.load-more-btn {
     display: flex;
     justify-content: center;
     align-items: center;
