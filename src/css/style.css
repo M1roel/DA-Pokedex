@@ -10,14 +10,22 @@ body {
 }
 
 .card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 500px;
     padding: 10px;
 }
 
 .card-img-top {
-    max-height: 200px;
+    height: 200px;
+    width: 200px;
 }
 
 .progress {
     margin-bottom: 5px;
+}
+
+.mb-10 {
+    margin-bottom: 10px;
 }
