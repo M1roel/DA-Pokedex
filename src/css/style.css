@@ -8,3 +8,12 @@ body {
     align-items: center;
     flex-wrap: wrap;
 }
+
+.card {
+    height: 400px;
+    padding: 10px;
+}
+
+.card-img-top {
+    max-height: 200px;
+}

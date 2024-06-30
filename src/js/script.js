@@ -29,17 +29,23 @@ async function fetchPokemonDetails(url) {
 }
 
 function generatePokemon(pokemon) {
+  const capitalizedPokemonName = capitalizeFirstLetter(pokemon.name);
   return `
-      <div class="card" style="width: 18rem;">
-      <img class="card-img-top" src="${pokemon.sprites.front_default}" alt="${pokemon.name}">
-        <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
+    <div class="card" style="width: 18rem;">
+      <div class="pkmName">${capitalizedPokemonName}</div>
+      <img class="card-img-top" src="${pokemon.sprites.other.dream_world.front_default}" alt="${pokemon.name}">
+      <div class="card-body">
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      </div>
     </div>
-      `;
+  `;
 }
 
 function loadMore() {
   limit += 20;
   init();
+}
+
+function capitalizeFirstLetter(string) {
+  return string[0].toUpperCase() + string.slice(1);
 }
