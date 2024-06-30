@@ -18,8 +18,10 @@ async function showPokemon(pokemons) {
   for (let i = 0; i < pokemons.length; i++) {
     const pokemon = pokemons[i];
     let pokemonDetails = await fetchPokemonDetails(pokemon.url);
+    let speciesDetails = await fetchSpeciesDetails(pokemonDetails.species.url);
+    let flavorText = getFlavorText(speciesDetails, 'de');
     document.querySelector(".content").innerHTML +=
-      generatePokemon(pokemonDetails);
+      generatePokemon(pokemonDetails, flavorText);
   }
 }
 
@@ -28,7 +30,17 @@ async function fetchPokemonDetails(url) {
   return await response.json();
 }
 
-function generatePokemon(pokemon) {
+async function fetchSpeciesDetails(url) {
+  let response = await fetch(url);
+  return await response.json();
+}
+
+function getFlavorText(species, language) {
+  let flavorTextEntry = species.flavor_text_entries.find(entry => entry.language.name === language);
+  return flavorTextEntry ? flavorTextEntry.flavor_text : 'Keine Beschreibung verfügbar';
+}
+
+function generatePokemon(pokemon, flavorText) {
   const capitalizedPokemonName = capitalizeFirstLetter(pokemon.name);
   let statsHtml = '';
 
@@ -47,7 +59,7 @@ function generatePokemon(pokemon) {
       <div class="pkmName mb-15">${capitalizedPokemonName}</div>
       <img class="card-img-top mb-15" src="${pokemon.sprites.other.dream_world.front_default}" alt="${pokemon.name}">
       <div class="card-body">
-        <p class="card-text mb-15">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <p class="card-text mb-15">${flavorText}</p>
         ${statsHtml}
       </div>
     </div>
