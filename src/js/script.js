@@ -44,10 +44,10 @@ function generatePokemon(pokemon) {
 
   return `
     <div class="card" style="width: 18rem;">
-      <div class="pkmName mb-10">${capitalizedPokemonName}</div>
-      <img class="card-img-top mb-10" src="${pokemon.sprites.other.dream_world.front_default}" alt="${pokemon.name}">
+      <div class="pkmName mb-15">${capitalizedPokemonName}</div>
+      <img class="card-img-top mb-15" src="${pokemon.sprites.other.dream_world.front_default}" alt="${pokemon.name}">
       <div class="card-body">
-        <p class="card-text mb-10">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <p class="card-text mb-15">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
         ${statsHtml}
       </div>
     </div>
