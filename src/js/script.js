@@ -1,15 +1,23 @@
 let limit = 20;
 let offset = 0;
-const BASE_URL = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`;
+const BASE_URL_TEMPLATE = `https://pokeapi.co/api/v2/pokemon?limit={limit}&offset={offset}`;
 
 function init() {
   fetchDataJson();
 }
 
+function getBaseUrl() {
+  return BASE_URL_TEMPLATE.replace('{limit}', limit).replace('{offset}', offset);
+}
+
 async function fetchDataJson() {
-  let response = await fetch(BASE_URL);
-  data = await response.json();
-  showPokemon(data.results);
+  try {
+    let response = await fetch(getBaseUrl());
+    data = await response.json();
+    showPokemon(data.results);
+  } catch (error) {
+    cosole.error("Fehler beim Abrufen der Pokemon-Daten:", error);
+  }
 }
 
 async function showPokemon(pokemons) {
@@ -19,9 +27,11 @@ async function showPokemon(pokemons) {
     const pokemon = pokemons[i];
     let pokemonDetails = await fetchPokemonDetails(pokemon.url);
     let speciesDetails = await fetchSpeciesDetails(pokemonDetails.species.url);
-    let flavorText = getFlavorText(speciesDetails, 'de');
-    document.querySelector(".content").innerHTML +=
-      generatePokemon(pokemonDetails, flavorText);
+    let flavorText = getFlavorText(speciesDetails, "de");
+    document.querySelector(".content").innerHTML += generatePokemon(
+      pokemonDetails,
+      flavorText
+    );
   }
 }
 
@@ -36,16 +46,20 @@ async function fetchSpeciesDetails(url) {
 }
 
 function getFlavorText(species, language) {
-  let flavorTextEntry = species.flavor_text_entries.find(entry => entry.language.name === language);
-  return flavorTextEntry ? flavorTextEntry.flavor_text : 'Keine Beschreibung verfügbar';
+  let flavorTextEntry = species.flavor_text_entries.find(
+    (entry) => entry.language.name === language
+  );
+  return flavorTextEntry
+    ? flavorTextEntry.flavor_text
+    : "Keine Beschreibung verfügbar";
 }
 
 function generatePokemon(pokemon, flavorText) {
   const capitalizedPokemonName = capitalizeFirstLetter(pokemon.name);
-  let statsHtml = '';
+  let statsHtml = "";
 
   for (const stat of pokemon.stats) {
-    const statName = capitalizeFirstLetter(stat.stat.name.replace('-', ' '));
+    const statName = capitalizeFirstLetter(stat.stat.name.replace("-", " "));
     const statValue = stat.base_stat;
     statsHtml += `
       <div class="progress">

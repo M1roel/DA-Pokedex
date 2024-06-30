@@ -30,3 +30,13 @@ body {
 .mb-15 {
     margin-bottom: 15px;
 }
+
+.mt-15 {
+    margin-top: 15px;
+}
+
+.load-more {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
