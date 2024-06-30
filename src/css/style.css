@@ -10,10 +10,14 @@ body {
 }
 
 .card {
-    height: 400px;
+    height: 500px;
     padding: 10px;
 }
 
 .card-img-top {
     max-height: 200px;
+}
+
+.progress {
+    margin-bottom: 5px;
 }
