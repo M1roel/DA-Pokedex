@@ -94,7 +94,7 @@ function generatePokemon(pokemon, flavorText) {
   for (const type of pokemon.types) {
     const typeUrl = type.type.url;
     const typeId = typeUrl.split('/').filter(Boolean).pop();
-    typesHtml += `<img src="/public/img/${typeId}.png" alt="${type.type.name}" class="type-icon">`;
+    typesHtml += `<img src="./img/${typeId}.png" alt="${type.type.name}" class="type-icon">`;
   }
 
   const mainType = pokemon.types[0].type.name;
@@ -121,3 +121,5 @@ function loadMore() {
 function capitalizeFirstLetter(string) {
   return string[0].toUpperCase() + string.slice(1);
 }
+
+document.addEventListener("DOMContentLoaded", init);
