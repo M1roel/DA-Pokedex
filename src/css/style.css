@@ -13,7 +13,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 550px;
+    height: 600px;
     padding: 10px;
     margin: 5px;
 }
@@ -40,3 +40,9 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+.type-icon {
+    width: auto;
+    height: 24px;
+    margin-right: 5px;
+  }  

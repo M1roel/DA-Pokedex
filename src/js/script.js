@@ -57,6 +57,7 @@ function getFlavorText(species, language) {
 function generatePokemon(pokemon, flavorText) {
   const capitalizedPokemonName = capitalizeFirstLetter(pokemon.name);
   let statsHtml = "";
+  let typesHtml = "";
 
   for (const stat of pokemon.stats) {
     const statName = capitalizeFirstLetter(stat.stat.name.replace("-", " "));
@@ -68,9 +69,16 @@ function generatePokemon(pokemon, flavorText) {
     `;
   }
 
+  for (const type of pokemon.types) {
+    const typeUrl = type.type.url;
+    const typeId = typeUrl.split('/').filter(Boolean).pop();
+    typesHtml += `<img src="/public/img/${typeId}.png" alt="${type.type.name}" class="type-icon">`;
+  }
+
   return `
     <div class="card" style="width: 18rem;">
       <div class="pkmName mb-15">${capitalizedPokemonName}</div>
+      <div class="types mb-15">${typesHtml}</div>
       <img class="card-img-top mb-15" src="${pokemon.sprites.other.dream_world.front_default}" alt="${pokemon.name}">
       <div class="card-body">
         <p class="card-text mb-15">${flavorText}</p>
