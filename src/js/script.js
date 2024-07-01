@@ -2,6 +2,28 @@ let limit = 20;
 let offset = 0;
 const BASE_URL_TEMPLATE = `https://pokeapi.co/api/v2/pokemon?limit={limit}&offset={offset}`;
 
+const typeColors = {
+  grass: "#78C850",
+  poison: "#A040A0",
+  fire: "#F08030",
+  flying: "#A890F0",
+  water: "#6890F0",
+  bug: "#A8B820",
+  normal: "#A8A878",
+  electric: "#F8D030",
+  ground: "#E0C068",
+  fairy: "#EE99AC",
+  fighting: "#C03028",
+  psychic: "#F85888",
+  rock: "#B8A038",
+  steel: "#B8B8D0",
+  ice: "#98D8D8",
+  ghost: "#705898",
+  dragon: "#7038F8",
+  dark: "#705848"
+};
+
+
 function init() {
   fetchDataJson();
 }
@@ -75,14 +97,17 @@ function generatePokemon(pokemon, flavorText) {
     typesHtml += `<img src="/public/img/${typeId}.png" alt="${type.type.name}" class="type-icon">`;
   }
 
+  const mainType = pokemon.types[0].type.name;
+  const backgroundColor = typeColors[mainType] || '#FFF';
+
   return `
-    <div class="card" style="width: 18rem;">
+    <div class="card" style="width: 18rem; background-color: ${backgroundColor};">
       <div class="pkmName mb-15">${capitalizedPokemonName}</div>
       <div class="types mb-15">${typesHtml}</div>
       <img class="card-img-top mb-15" src="${pokemon.sprites.other.dream_world.front_default}" alt="${pokemon.name}">
       <div class="card-body">
-        <p class="card-text mb-15">${flavorText}</p>
-        ${statsHtml}
+        <!-- <p class="card-text mb-15">${flavorText}</p> -->
+        <!-- ${statsHtml} -->
       </div>
     </div>
   `;
