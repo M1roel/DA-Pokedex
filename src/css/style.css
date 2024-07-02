@@ -16,7 +16,13 @@ body {
     height: 350px;
     padding: 10px;
     margin: 5px;
+    cursor: pointer;
+    transition: transform 0.125s ease-in-out;
 }
+  
+.card:hover {
+    transform: scale(1.1);
+  }
 
 .card-img-top {
     height: 200px;
