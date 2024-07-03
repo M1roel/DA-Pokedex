@@ -111,7 +111,12 @@ function capitalizeFirstLetter(string) {
 
 function openCard(i) {
   currentIndex = i;
-  const pokemon = storedPokemons[i];
+  const pokemon = storedPokemons[currentIndex];
+  const openCardDiv = document.getElementById('open-card');
+  const overflow = document.querySelector('body');
+  const arrows = document.querySelector('.arrows');
+  const arrowLeft = document.querySelector('.arrow-left');
+  const arrowRight = document.querySelector('.arrow-right');
 
   const capitalizedPokemonName = capitalizeFirstLetter(pokemon.name);
   let statsHtml = "";
@@ -152,39 +157,59 @@ function openCard(i) {
     </div>
   `;
 
-  const openCardDiv = document.getElementById('open-card');
-  const overflow = document.querySelector('body');
-  const arrows = document.querySelector('.arrows');
   openCardDiv.innerHTML = openCardContent;
   openCardDiv.classList.remove('d-none');
   arrows.classList.remove('d-none');
-  overflow.classList.add('no-scroll')
+  overflow.classList.add('no-scroll');
+
+  // Sichtbarkeit der Pfeile anpassen
+  if (currentIndex === 0) {
+    arrowLeft.classList.add('d-none');
+  } else {
+    arrowLeft.classList.remove('d-none');
+  }
+
+  if (currentIndex === storedPokemons.length - 1) {
+    arrowRight.classList.add('d-none');
+  } else {
+    arrowRight.classList.remove('d-none');
+  }
 }
 
 function closeCard() {
   const openCardDiv = document.getElementById('open-card');
   const overflow = document.querySelector('body');
   const arrows = document.querySelector('.arrows');
-  const arrowLeft = document.querySelector('.arrow-left');
+  const arrowLeft = document.querySelector('.arrow-left');  
+  const arrowRight = document.querySelector('.arrow-right');
   openCardDiv.classList.add('d-none');
   arrows.classList.add('d-none');
   overflow.classList.remove('no-scroll')
   arrowLeft.classList.remove('d-none');
+  arrowRight.classList.remove('d-none');
   openCardDiv.innerHTML = '';
 }
 
 function navigateCard(direction) {
   currentIndex += direction;
   const arrowLeft = document.querySelector('.arrow-left');
+  const arrowRight = document.querySelector('.arrow-right');
   if (currentIndex < 0) {
     currentIndex = storedPokemons.length - 1;
   } else if (currentIndex >= storedPokemons.length) {
     currentIndex = 0;
   }
   openCard(currentIndex);
+
   if (currentIndex === 0) {
     arrowLeft.classList.add('d-none');
   } else {
     arrowLeft.classList.remove('d-none');
+  }
+
+  if (currentIndex == storedPokemons.length-1) {
+    arrowRight.classList.add('d-none');
+  } else {
+    arrowRight.classList.remove('d-none');
   }
 }

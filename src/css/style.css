@@ -78,7 +78,7 @@ body {
 
 .arrow-left,
 .arrow-right {
-  position: absolute;
+  position: fixed;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
