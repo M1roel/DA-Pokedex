@@ -151,13 +151,17 @@ function openCard(i) {
     </div>
   `;
 
-  const openCardDiv = document.getElementById("open-card");
+  const openCardDiv = document.getElementById('open-card');  
+  const overflow = document.querySelector('body');
   openCardDiv.innerHTML = openCardContent;
-  openCardDiv.classList.remove("d-none");
+  openCardDiv.classList.remove('d-none');  
+  overflow.classList.add('no-scroll')
 }
 
 function closeCard() {
-  const openCardDiv = document.getElementById("open-card");
-  openCardDiv.classList.add("d-none");
-  openCardDiv.innerHTML = "";
+  const openCardDiv = document.getElementById('open-card');
+  const overflow = document.querySelector('body');
+  openCardDiv.classList.add('d-none');
+  overflow.classList.remove('no-scroll')
+  openCardDiv.innerHTML = '';
 }

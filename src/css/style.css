@@ -46,6 +46,10 @@ body {
     display: none !important;
 }
 
+.no-scroll {
+    overflow: hidden;
+}
+
 .open-card {
     position: fixed;
     top: 0;
