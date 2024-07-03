@@ -57,11 +57,7 @@ async function showPokemon(pokemons) {
     let flavorText = getFlavorText(speciesDetails, "de");
     pokemonDetails.speciesDetails = speciesDetails;
     storedPokemons.push(pokemonDetails);
-    document.querySelector(".content").innerHTML += generatePokemon(
-      pokemonDetails,
-      flavorText,
-      i
-    );
+    document.querySelector(".content").innerHTML += generatePokemon(pokemonDetails, i);
   }
 }
 
@@ -79,14 +75,11 @@ function getFlavorText(species, language) {
   let flavorTextEntry = species.flavor_text_entries.find(
     (entry) => entry.language.name === language
   );
-  return flavorTextEntry
-    ? flavorTextEntry.flavor_text
-    : "Keine Beschreibung verfügbar";
+  return flavorTextEntry ? flavorTextEntry.flavor_text : "Keine Beschreibung verfügbar";
 }
 
-function generatePokemon(pokemon, flavorText, i) {
+function generatePokemon(pokemon, i) {
   const capitalizedPokemonName = capitalizeFirstLetter(pokemon.name);
-  let statsHtml = "";
   let typesHtml = "";
 
   for (const type of pokemon.types) {
