@@ -78,10 +78,11 @@ body {
 
 .arrow-left,
 .arrow-right {
-    position: absolute;
-    top: 100px;
-    cursor: pointer;
-    z-index: 100;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 100;
 }
 
 .arrow-left img,

@@ -83,11 +83,11 @@
     <div class="single-card">
       <div class="open-card d-none" id="open-card" onclick="closeCard()"></div>
       <div class="arrows d-none">
-        <div class="arrow-left">
-          <img src="img/arrow-left.png" alt="leftArrow" onclick="left()" />
+        <div class="arrow-left" onclick="navigateCard(-1)">
+          <img src="img/arrow-left.png" alt="leftArrow" />
         </div>
-        <div class="arrow-right">
-          <img src="img/arrow-right.png" alt="rightArrow" onclick="right()" />
+        <div class="arrow-right" onclick="navigateCard(1)">
+          <img src="img/arrow-right.png" alt="rightArrow" />
         </div>
       </div>
     </div>

@@ -24,6 +24,7 @@ const typeColors = {
 };
 
 let storedPokemons = [];
+let currentIndex = 0;
 
 function init() {
   fetchDataJson();
@@ -109,6 +110,7 @@ function capitalizeFirstLetter(string) {
 }
 
 function openCard(i) {
+  currentIndex = i;
   const pokemon = storedPokemons[i];
 
   const capitalizedPokemonName = capitalizeFirstLetter(pokemon.name);
@@ -163,8 +165,26 @@ function closeCard() {
   const openCardDiv = document.getElementById('open-card');
   const overflow = document.querySelector('body');
   const arrows = document.querySelector('.arrows');
+  const arrowLeft = document.querySelector('.arrow-left');
   openCardDiv.classList.add('d-none');
   arrows.classList.add('d-none');
   overflow.classList.remove('no-scroll')
+  arrowLeft.classList.remove('d-none');
   openCardDiv.innerHTML = '';
+}
+
+function navigateCard(direction) {
+  currentIndex += direction;
+  const arrowLeft = document.querySelector('.arrow-left');
+  if (currentIndex < 0) {
+    currentIndex = storedPokemons.length - 1;
+  } else if (currentIndex >= storedPokemons.length) {
+    currentIndex = 0;
+  }
+  openCard(currentIndex);
+  if (currentIndex === 0) {
+    arrowLeft.classList.add('d-none');
+  } else {
+    arrowLeft.classList.remove('d-none');
+  }
 }
