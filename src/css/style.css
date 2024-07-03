@@ -1,5 +1,12 @@
+@font-face {
+    font-family: 'Lato';
+    src: url('/src/fonts/Lato-Regular.ttf') format('woff2');
+}
+
 body {
     background-color: rgba(0, 0, 0, 0.2);
+    font-family: 'Lato';
+    font-weight: 900;
 }
 
 .content {
