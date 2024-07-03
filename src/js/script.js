@@ -20,7 +20,7 @@ const typeColors = {
   ice: "#98D8D8",
   ghost: "#705898",
   dragon: "#7038F8",
-  dark: "#705848"
+  dark: "#705848",
 };
 
 let storedPokemons = [];
@@ -30,7 +30,10 @@ function init() {
 }
 
 function getBaseUrl() {
-  return BASE_URL_TEMPLATE.replace('{limit}', limit).replace('{offset}', offset);
+  return BASE_URL_TEMPLATE.replace("{limit}", limit).replace(
+    "{offset}",
+    offset
+  );
 }
 
 async function fetchDataJson() {
@@ -52,12 +55,12 @@ async function showPokemon(pokemons) {
     let pokemonDetails = await fetchPokemonDetails(pokemon.url);
     let speciesDetails = await fetchSpeciesDetails(pokemonDetails.species.url);
     let flavorText = getFlavorText(speciesDetails, "de");
-    pokemonDetails.speciesDetails = speciesDetails; // Speichern Sie die Speziesdetails im Pokémon-Objekt
+    pokemonDetails.speciesDetails = speciesDetails;
     storedPokemons.push(pokemonDetails);
     document.querySelector(".content").innerHTML += generatePokemon(
       pokemonDetails,
       flavorText,
-      i // Übergeben Sie den Index
+      i
     );
   }
 }
@@ -81,39 +84,25 @@ function getFlavorText(species, language) {
     : "Keine Beschreibung verfügbar";
 }
 
-function generatePokemon(pokemon, flavorText, index) {
+function generatePokemon(pokemon, flavorText, i) {
   const capitalizedPokemonName = capitalizeFirstLetter(pokemon.name);
   let statsHtml = "";
   let typesHtml = "";
 
-  for (const stat of pokemon.stats) {
-    const statName = capitalizeFirstLetter(stat.stat.name.replace("-", " "));
-    const statValue = stat.base_stat;
-    statsHtml += `
-      <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: ${statValue}%" aria-valuenow="${statValue}" aria-valuemin="0" aria-valuemax="100">${statName}: ${statValue}</div>
-      </div>
-    `;
-  }
-
   for (const type of pokemon.types) {
     const typeUrl = type.type.url;
-    const typeId = typeUrl.split('/').filter(Boolean).pop();
+    const typeId = typeUrl.split("/").filter(Boolean).pop();
     typesHtml += `<img src="./img/${typeId}.png" alt="${type.type.name}" class="type-icon">`;
   }
 
   const mainType = pokemon.types[0].type.name;
-  const backgroundColor = typeColors[mainType] || '#FFF';
+  const backgroundColor = typeColors[mainType] || "#FFF";
 
   return `
-    <div class="card" style="width: 18rem; background-color: ${backgroundColor};" data-index="${index}" onclick="openCard(${index})">
+    <div class="card" style="width: 18rem; background-color: ${backgroundColor};" data-index="${i}" onclick="openCard(${i})">
       <div class="pkmName mb-15">${capitalizedPokemonName}</div>
       <div class="types mb-15">${typesHtml}</div>
       <img class="card-img-top mb-15" src="${pokemon.sprites.other.dream_world.front_default}" alt="${pokemon.name}">
-      <div class="card-body">
-        <!-- <p class="card-text mb-15">${flavorText}</p> -->
-        <!-- ${statsHtml} -->
-      </div>
     </div>
   `;
 }
@@ -127,8 +116,8 @@ function capitalizeFirstLetter(string) {
   return string[0].toUpperCase() + string.slice(1);
 }
 
-function openCard(index) {
-  const pokemon = storedPokemons[index];
+function openCard(i) {
+  const pokemon = storedPokemons[i];
 
   const capitalizedPokemonName = capitalizeFirstLetter(pokemon.name);
   let statsHtml = "";
@@ -139,23 +128,25 @@ function openCard(index) {
     const statName = capitalizeFirstLetter(stat.stat.name.replace("-", " "));
     const statValue = stat.base_stat;
     statsHtml += `
-      <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: ${statValue}%" aria-valuenow="${statValue}" aria-valuemin="0" aria-valuemax="100">${statName}: ${statValue}</div>
+      <div class="stat-container">
+        <div class="stat-name">${statName}</div>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" style="width: ${statValue}%" aria-valuenow="${statValue}" aria-valuemin="0" aria-valuemax="100">${statValue}</div>
+        </div>
       </div>
     `;
   }
 
   for (const type of pokemon.types) {
     const typeUrl = type.type.url;
-    const typeId = typeUrl.split('/').filter(Boolean).pop();
+    const typeId = typeUrl.split("/").filter(Boolean).pop();
     typesHtml += `<img src="./img/${typeId}.png" alt="${type.type.name}" class="type-icon">`;
   }
 
   const mainType = pokemon.types[0].type.name;
-  const backgroundColor = typeColors[mainType] || '#FFF';
+  const backgroundColor = typeColors[mainType] || "#FFF";
 
   const openCardContent = `
-    <button onclick="closeCard()" class="btn-close">Close</button>
     <div class="card" style="width: 18rem; background-color: ${backgroundColor};">
       <div class="pkmName mb-15">${capitalizedPokemonName}</div>
       <div class="types mb-15">${typesHtml}</div>
@@ -168,20 +159,12 @@ function openCard(index) {
   `;
 
   const openCardDiv = document.getElementById("open-card");
-  if (openCardDiv) {
-    openCardDiv.innerHTML = openCardContent;
-    openCardDiv.classList.remove("d-none");
-  } else {
-    console.error("Das Element '#open-card' wurde nicht gefunden.");
-  }
+  openCardDiv.innerHTML = openCardContent;
+  openCardDiv.classList.remove("d-none");
 }
 
 function closeCard() {
-  const openCardDiv = document.querySelector(".open-card");
-  if (openCardDiv) {
-    openCardDiv.classList.add("d-none");
-    openCardDiv.innerHTML = "";
-  } else {
-    console.error("Das Element '#open-card' wurde nicht gefunden.");
-  }
+  const openCardDiv = document.getElementById("open-card");
+  openCardDiv.classList.add("d-none");
+  openCardDiv.innerHTML = "";
 }
