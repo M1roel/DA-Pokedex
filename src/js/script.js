@@ -185,7 +185,3 @@ function closeCard() {
     console.error("Das Element '#open-card' wurde nicht gefunden.");
   }
 }
-
-document.addEventListener("DOMContentLoaded", function() {
-  init();
-});
