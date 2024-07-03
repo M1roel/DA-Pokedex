@@ -54,7 +54,6 @@ async function showPokemon(pokemons) {
     const pokemon = pokemons[i];
     let pokemonDetails = await fetchPokemonDetails(pokemon.url);
     let speciesDetails = await fetchSpeciesDetails(pokemonDetails.species.url);
-    let flavorText = getFlavorText(speciesDetails, "de");
     pokemonDetails.speciesDetails = speciesDetails;
     storedPokemons.push(pokemonDetails);
     document.querySelector(".content").innerHTML += generatePokemon(pokemonDetails, i);
@@ -151,17 +150,21 @@ function openCard(i) {
     </div>
   `;
 
-  const openCardDiv = document.getElementById('open-card');  
+  const openCardDiv = document.getElementById('open-card');
   const overflow = document.querySelector('body');
+  const arrows = document.querySelector('.arrows');
   openCardDiv.innerHTML = openCardContent;
-  openCardDiv.classList.remove('d-none');  
+  openCardDiv.classList.remove('d-none');
+  arrows.classList.remove('d-none');
   overflow.classList.add('no-scroll')
 }
 
 function closeCard() {
   const openCardDiv = document.getElementById('open-card');
   const overflow = document.querySelector('body');
+  const arrows = document.querySelector('.arrows');
   openCardDiv.classList.add('d-none');
+  arrows.classList.add('d-none');
   overflow.classList.remove('no-scroll')
   openCardDiv.innerHTML = '';
 }

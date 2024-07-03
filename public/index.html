@@ -77,10 +77,20 @@
         </div>
       </nav>
     </nav>
-    
+
     <div class="content mt-15"></div>
-    
-    <div class="open-card d-none" id="open-card" onclick="closeCard()"></div>
+
+    <div class="single-card">
+      <div class="open-card d-none" id="open-card" onclick="closeCard()"></div>
+      <div class="arrows d-none">
+        <div class="arrow-left">
+          <img src="img/arrow-left.png" alt="leftArrow" onclick="left()" />
+        </div>
+        <div class="arrow-right">
+          <img src="img/arrow-right.png" alt="rightArrow" onclick="right()" />
+        </div>
+      </div>
+    </div>
 
     <div class="load-more-btn mt-15 mb-15">
       <button onclick="loadMore()" class="btn btn-primary">Mehr Laden</button>

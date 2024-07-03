@@ -1,77 +1,100 @@
 body {
-    background-color: rgba(0, 0, 0, 0.2);
-    font-weight: 600;
+  background-color: rgba(0, 0, 0, 0.2);
+  font-weight: 600;
 }
 
 .content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .card {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: auto;
-    padding: 10px;
-    margin: 5px;
-    cursor: pointer;
-    transition: transform 0.125s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+  transition: transform 0.125s ease-in-out;
 }
-  
+
 .card:hover {
-    transform: scale(1.05);
-  }
+  transform: scale(1.05);
+}
 
 .card-img-top {
-    height: 200px;
-    width: 200px;
+  height: 200px;
+  width: 200px;
 }
 
 .progress {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 .mb-15 {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .mt-15 {
-    margin-top: 15px;
+  margin-top: 15px;
 }
 
 .d-none {
-    display: none !important;
+  display: none !important;
 }
 
 .no-scroll {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .open-card {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100vw;
-    background-color: rgba(0, 0, 0, 0.8);
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
 
 .load-more-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .type-icon {
-    width: auto;
-    height: 24px;
-    margin-right: 5px;
-  }
+  width: auto;
+  height: 24px;
+  margin-right: 5px;
+}
+
+.arrow-left,
+.arrow-right {
+    position: absolute;
+    top: 100px;
+    cursor: pointer;
+    z-index: 100;
+}
+
+.arrow-left img,
+.arrow-right img {
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+}
+
+.arrow-left {
+  left: 10px;
+}
+
+.arrow-right {
+  right: 10px;
+}
