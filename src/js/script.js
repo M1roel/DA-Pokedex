@@ -114,61 +114,23 @@ function openCard(i) {
   const arrowRight = document.querySelector(".arrow-right");
 
   const capitalizedPokemonName = capitalizeFirstLetter(pokemon.name);
-  let statsHtml = "";
-  let typesHtml = "";
-  let flavorText = getFlavorText(pokemon.speciesDetails, "de");
-
-  for (const stat of pokemon.stats) {
-    const statName = capitalizeFirstLetter(stat.stat.name.replace("-", " "));
-    const statValue = stat.base_stat;
-    statsHtml += `
-      <div class="stat-container">
-        <div class="stat-name">${statName}</div>
-        <div class="progress">
-          <div class="progress-bar" role="progressbar" style="width: ${statValue}%" aria-valuenow="${statValue}" aria-valuemin="0" aria-valuemax="100">${statValue}</div>
-        </div>
-      </div>
-    `;
-  }
-
-  for (const type of pokemon.types) {
-    const typeUrl = type.type.url;
-    const typeId = typeUrl.split("/").filter(Boolean).pop();
-    typesHtml += `<img src="./img/${typeId}.png" alt="${type.type.name}" class="type-icon">`;
-  }
+  const statsHtml = generateStatsHtml(pokemon.stats);
+  const typesHtml = generateTypesHtml(pokemon.types);
+  const flavorText = getFlavorText(pokemon.speciesDetails, "de");
 
   const mainType = pokemon.types[0].type.name;
   const backgroundColor = typeColors[mainType] || "#FFF";
 
-  const openCardContent = `
-    <div class="card" style="width: 18rem; background-color: ${backgroundColor};">
-      <div class="pkmName mb-15">${capitalizedPokemonName}</div>
-      <div class="types mb-15">${typesHtml}</div>
-      <img class="card-img-top mb-15" src="${pokemon.sprites.other.dream_world.front_default}" alt="${pokemon.name}">
-      <div class="card-body">
-        <p class="card-text mb-15">${flavorText}</p>
-        ${statsHtml}
-      </div>
-    </div>
-  `;
+  const openCardContent = generateOpenCardContent(capitalizedPokemonName, typesHtml, flavorText, statsHtml, pokemon, backgroundColor);
 
   openCardDiv.innerHTML = openCardContent;
   openCardDiv.classList.remove("d-none");
   arrows.classList.remove("d-none");
   overflow.classList.add("no-scroll");
 
-  if (currentIndex === 0) {
-    arrowLeft.classList.add("d-none");
-  } else {
-    arrowLeft.classList.remove("d-none");
-  }
-
-  if (currentIndex === storedPokemons.length - 1) {
-    arrowRight.classList.add("d-none");
-  } else {
-    arrowRight.classList.remove("d-none");
-  }
+  updateArrowsVisibility(currentIndex, arrowLeft, arrowRight, storedPokemons.length);
 }
+
 
 function closeCard() {
   const openCardDiv = document.getElementById("open-card");
