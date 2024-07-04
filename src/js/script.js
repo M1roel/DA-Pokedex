@@ -88,14 +88,7 @@ function getFlavorText(species, language) {
 
 function generatePokemon(pokemon, i) {
   const capitalizedPokemonName = capitalizeFirstLetter(pokemon.name);
-  let typesHtml = "";
-
-  for (const type of pokemon.types) {
-    const typeUrl = type.type.url;
-    const typeId = typeUrl.split("/").filter(Boolean).pop();
-    typesHtml += `<img src="./img/${typeId}.png" alt="${type.type.name}" class="type-icon">`;
-  }
-
+  const typesHtml = generateTypesHtml(pokemon.types);
   const mainType = pokemon.types[0].type.name;
   const backgroundColor = typeColors[mainType] || "#FFF";
 
