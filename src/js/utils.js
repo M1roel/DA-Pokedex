@@ -30,7 +30,6 @@ function updateArrowsVisibility(currentIndex, totalPokemons) {
   }
 }
 
-
 function getSearchInput() {
   return document.getElementById("searchInput").value.toLowerCase().trim();
 }
@@ -47,3 +46,19 @@ function displayPokemons(pokemons, contentDiv) {
     contentDiv.innerHTML += generatePokemon(pokemon, originalIndex);
   });
 }
+
+function toggleElement(element, className, add) {
+  if (add) {
+    element.classList.add(className);
+  } else {
+    element.classList.remove(className);
+  }
+}
+
+function toggleOpenCardDisplay(isVisible) {
+  toggleElement(openCardDiv, "d-none", !isVisible);
+  toggleElement(arrows, "d-none", !isVisible);
+  toggleElement(body, "no-scroll", isVisible);
+}
+
+searchInputElem.addEventListener("input", filterAndShow);

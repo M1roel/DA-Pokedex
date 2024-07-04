@@ -3,10 +3,7 @@ function init() {
 }
 
 function getBaseUrl() {
-  return BASE_URL_TEMPLATE.replace("{limit}", limit).replace(
-    "{offset}",
-    offset
-  );
+  return BASE_URL_TEMPLATE.replace("{limit}", limit).replace("{offset}", offset);
 }
 
 async function fetchDataJson() {
@@ -15,9 +12,7 @@ async function fetchDataJson() {
     let data = await response.json();
 
     showLoadingScreen();
-
     await showPokemon(data.results);
-
     stopLoadingScreen();
   } catch (error) {
     console.error("Fehler beim Abrufen der Pokemon-Daten:", error);
@@ -26,7 +21,6 @@ async function fetchDataJson() {
 
 function filterAndShow() {
   const searchInput = getSearchInput();
-  const contentDiv = document.querySelector(".content");
   contentDiv.innerHTML = "";
 
   if (searchInput.length >= 3) {
@@ -38,16 +32,12 @@ function filterAndShow() {
 }
 
 async function showPokemon(pokemons) {
-  for (let i = 0; i < pokemons.length; i++) {
-    const pokemon = pokemons[i];
+  for (let pokemon of pokemons) {
     let pokemonDetails = await fetchPokemonDetails(pokemon.url);
     let speciesDetails = await fetchSpeciesDetails(pokemonDetails.species.url);
     pokemonDetails.speciesDetails = speciesDetails;
     storedPokemons.push(pokemonDetails);
-    document.querySelector(".content").innerHTML += generatePokemon(
-      pokemonDetails,
-      storedPokemons.length - 1
-    );
+    contentDiv.innerHTML += generatePokemon(pokemonDetails, storedPokemons.length - 1);
   }
 }
 
@@ -65,9 +55,7 @@ function getFlavorText(species, language) {
   let flavorTextEntry = species.flavor_text_entries.find(
     (entry) => entry.language.name === language
   );
-  return flavorTextEntry
-    ? flavorTextEntry.flavor_text
-    : "Keine Beschreibung verfügbar";
+  return flavorTextEntry ? flavorTextEntry.flavor_text : "Keine Beschreibung verfügbar";
 }
 
 function generatePokemon(pokemon, i) {
@@ -91,73 +79,56 @@ function capitalizeFirstLetter(string) {
 function openCard(i) {
   currentIndex = i;
   const pokemon = storedPokemons[currentIndex];
-  const openCardDiv = document.getElementById("open-card");
 
   const capitalizedPokemonName = capitalizeFirstLetter(pokemon.name);
   const statsHtml = generateStatsHtml(pokemon.stats);
   const typesHtml = generateTypesHtml(pokemon.types);
   const flavorText = getFlavorText(pokemon.speciesDetails, "de");
-
   const mainType = pokemon.types[0].type.name;
   const backgroundColor = typeColors[mainType] || "#FFF";
 
-  const openCardContent = generateOpenCardContent(capitalizedPokemonName, typesHtml, flavorText, statsHtml, pokemon, backgroundColor);
+  const openCardContent = generateOpenCardContent(
+    capitalizedPokemonName,
+    typesHtml,
+    flavorText,
+    statsHtml,
+    pokemon,
+    backgroundColor
+  );
 
   openCardDiv.innerHTML = openCardContent;
-  toggleOpenCardDisplay(openCardDiv, true);
+  toggleOpenCardDisplay(true);
   updateArrowsVisibility(currentIndex, storedPokemons.length);
 }
 
 function closeCard() {
-  const openCardDiv = document.getElementById("open-card");
-  const overflow = document.querySelector("body");
-  const arrows = document.querySelector(".arrows");
-  const arrowLeft = document.querySelector(".arrow-left");
-  const arrowRight = document.querySelector(".arrow-right");
-  openCardDiv.classList.add("d-none");
-  arrows.classList.add("d-none");
-  overflow.classList.remove("no-scroll");
-  arrowLeft.classList.remove("d-none");
-  arrowRight.classList.remove("d-none");
+  toggleOpenCardDisplay(false);
   openCardDiv.innerHTML = "";
 }
 
 function navigateCard(direction) {
   currentIndex += direction;
-  const arrowLeft = document.querySelector(".arrow-left");
-  const arrowRight = document.querySelector(".arrow-right");
+
   if (currentIndex < 0) {
     currentIndex = storedPokemons.length - 1;
   } else if (currentIndex >= storedPokemons.length) {
     currentIndex = 0;
   }
+
   openCard(currentIndex);
-
-  if (currentIndex === 0) {
-    arrowLeft.classList.add("d-none");
-  } else {
-    arrowLeft.classList.remove("d-none");
-  }
-
-  if (currentIndex == storedPokemons.length - 1) {
-    arrowRight.classList.add("d-none");
-  } else {
-    arrowRight.classList.remove("d-none");
-  }
+  updateArrowsVisibility(currentIndex, storedPokemons.length);
 }
 
 function showLoadingScreen() {
-  document.getElementById("pokeballIcon").classList.add("pokeball-icon");
-  document.querySelector(".content").classList.add("d-none");
-  document.querySelector(".load-more-btn").classList.add("d-none");
-  document.querySelector(".loadingScreen").classList.remove("d-none");
+  toggleElement(pokeballIcon, "pokeball-icon", true);
+  toggleElement(contentDiv, "d-none", true);
+  toggleElement(loadMoreBtn, "d-none", true);
+  toggleElement(loadingScreen, "d-none", false);
 }
 
 function stopLoadingScreen() {
-  document.getElementById("pokeballIcon").classList.remove("pokeball-icon");
-  document.querySelector(".content").classList.remove("d-none");
-  document.querySelector(".load-more-btn").classList.remove("d-none");
-  document.querySelector(".loadingScreen").classList.add("d-none");
+  toggleElement(pokeballIcon, "pokeball-icon", false);
+  toggleElement(contentDiv, "d-none", false);
+  toggleElement(loadMoreBtn, "d-none", false);
+  toggleElement(loadingScreen, "d-none", true);
 }
-
-document.getElementById("searchInput").addEventListener("input", filterAndShow);

@@ -4,6 +4,7 @@ let storedPokemons = [];
 let currentIndex = 0;
 const BASE_URL_TEMPLATE = `https://pokeapi.co/api/v2/pokemon?limit={limit}&offset={offset}`;
 const MAX_DISPLAY_POKEMONS = 10;
+
 const typeColors = {
   grass: "#78C850",
   poison: "#A040A0",
@@ -24,3 +25,14 @@ const typeColors = {
   dragon: "#7038F8",
   dark: "#705848",
 };
+
+const contentDiv = document.querySelector(".content");
+const openCardDiv = document.getElementById("open-card");
+const body = document.querySelector("body");
+const arrows = document.querySelector(".arrows");
+const arrowLeft = document.querySelector(".arrow-left");
+const arrowRight = document.querySelector(".arrow-right");
+const searchInputElem = document.getElementById("searchInput");
+const pokeballIcon = document.getElementById("pokeballIcon");
+const loadMoreBtn = document.querySelector(".load-more-btn");
+const loadingScreen = document.querySelector(".loadingScreen");
