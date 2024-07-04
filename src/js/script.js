@@ -19,18 +19,6 @@ async function fetchDataJson() {
   }
 }
 
-function filterAndShow() {
-  const searchInput = getSearchInput();
-  contentDiv.innerHTML = "";
-
-  if (searchInput.length >= 3) {
-    const filteredPokemons = filterPokemonsByName(searchInput);
-    displayPokemons(filteredPokemons, contentDiv);
-  } else {
-    displayPokemons(storedPokemons, contentDiv);
-  }
-}
-
 async function showPokemon(pokemons) {
   for (let pokemon of pokemons) {
     let pokemonDetails = await fetchPokemonDetails(pokemon.url);
@@ -132,3 +120,7 @@ function stopLoadingScreen() {
   toggleElement(loadMoreBtn, "d-none", false);
   toggleElement(loadingScreen, "d-none", true);
 }
+
+searchInputElem.addEventListener("input", function() {
+  filterAndShow(searchInputElem);
+});

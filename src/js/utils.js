@@ -61,4 +61,14 @@ function toggleOpenCardDisplay(isVisible) {
   toggleElement(body, "no-scroll", isVisible);
 }
 
-searchInputElem.addEventListener("input", filterAndShow);
+function filterAndShow(searchInputElem) {
+  const searchInput = searchInputElem.value.toLowerCase().trim();
+  contentDiv.innerHTML = "";
+
+  if (searchInput.length >= 3) {
+    const filteredPokemons = filterPokemonsByName(searchInput);
+    displayPokemons(filteredPokemons, contentDiv);
+  } else {
+    displayPokemons(storedPokemons, contentDiv);
+  }
+}
