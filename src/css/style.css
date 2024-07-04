@@ -104,11 +104,11 @@ body {
 }
 
 .arrow-left {
-  left: 40%;
+  left: 35%;
 }
 
 .arrow-right {
-  right: 40%;
+  right: 35%;
 }
 
 @keyframes pokeballAnimation {
