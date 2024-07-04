@@ -1,4 +1,4 @@
-let limit = 200;
+let limit = 40;
 let offset = 0;
 const BASE_URL_TEMPLATE = `https://pokeapi.co/api/v2/pokemon?limit={limit}&offset={offset}`;
 const MAX_DISPLAY_POKEMONS = 10;
@@ -123,7 +123,7 @@ function generatePokemon(pokemon, i) {
 }
 
 function loadMore() {
-  offset += 20;
+  offset += 30;
   fetchDataJson();
 }
 
