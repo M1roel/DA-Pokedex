@@ -93,9 +93,9 @@ function generatePokemon(pokemon, i) {
 
   return `
     <div class="card" style="width: 18rem; background-color: ${backgroundColor};" data-index="${i}" onclick="openCard(${i})">
-      <div class="pkmName mb-15">${capitalizedPokemonName}</div>
-      <div class="types mb-15">${typesHtml}</div>
-      <img class="card-img-top mb-15" src="${pokemon.sprites.other.dream_world.front_default}" alt="${pokemon.name}">
+      <div class="pkmName mb-5">${capitalizedPokemonName}</div>
+      <div class="types mb-5">${typesHtml}</div>
+      <img class="card-img-top mb-5" src="${pokemon.sprites.other.dream_world.front_default}" alt="${pokemon.name}">
     </div>
   `;
 }
@@ -147,11 +147,11 @@ function openCard(i) {
 
   const openCardContent = `
     <div class="card" style="width: 18rem; background-color: ${backgroundColor};">
-      <div class="pkmName mb-15">${capitalizedPokemonName}</div>
-      <div class="types mb-15">${typesHtml}</div>
-      <img class="card-img-top mb-15" src="${pokemon.sprites.other.dream_world.front_default}" alt="${pokemon.name}">
+      <div class="pkmName mb-5">${capitalizedPokemonName}</div>
+      <div class="types mb-5">${typesHtml}</div>
+      <img class="card-img-top mb-5" src="${pokemon.sprites.other.dream_world.front_default}" alt="${pokemon.name}">
       <div class="card-body">
-        <p class="card-text mb-15">${flavorText}</p>
+        <p class="card-text mb-5">${flavorText}</p>
         ${statsHtml}
       </div>
     </div>

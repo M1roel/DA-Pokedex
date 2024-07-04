@@ -15,7 +15,6 @@ body {
   justify-content: center;
   align-items: center;
   height: auto;
-  padding: 10px;
   margin: 5px;
   cursor: pointer;
   transition: transform 0.125s ease-in-out;
@@ -32,6 +31,10 @@ body {
 
 .progress {
   margin-bottom: 5px;
+}
+
+.mb-5 {
+  margin-bottom: 5px !important;
 }
 
 .mb-15 {
