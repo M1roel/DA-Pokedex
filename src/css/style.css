@@ -124,14 +124,14 @@ body {
 }
 
 .loadingScreen {
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .pokeball-icon {
-    animation: pokeballAnimation 2.8s steps(7) infinite;
+  animation: pokeballAnimation 2.8s steps(7) infinite;
   width: auto;
   height: auto;
 }
