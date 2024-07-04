@@ -238,12 +238,14 @@ function navigateCard(direction) {
 function showLoadingScreen() {
   document.getElementById('pokeballIcon').classList.add('pokeball-icon');
   document.querySelector('.content').classList.add('d-none');
+  document.querySelector('.load-more-btn').classList.add('d-none');
   document.querySelector('.loadingScreen').classList.remove('d-none');
 }
 
 function stopLoadingScreen() {
   document.getElementById('pokeballIcon').classList.remove('pokeball-icon');
   document.querySelector('.content').classList.remove('d-none');
+  document.querySelector('.load-more-btn').classList.remove('d-none');
   document.querySelector('.loadingScreen').classList.add('d-none');
 }
 
