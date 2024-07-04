@@ -19,12 +19,13 @@
           <a class="navbar-brand" href="#">Pokedex</a>
             <form class="d-flex" role="search">
               <input
+                id="searchInput"
                 class="form-control me-2"
                 type="search"
                 placeholder="Suchen"
                 aria-label="Search"
               />
-              <button class="btn btn-outline-success" type="submit">
+              <button class="btn btn-outline-success" type="submit" onclick="filterAndShow()">
                 Suchen
               </button>
             </form>

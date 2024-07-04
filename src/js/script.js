@@ -1,6 +1,7 @@
 let limit = 20;
 let offset = 0;
 const BASE_URL_TEMPLATE = `https://pokeapi.co/api/v2/pokemon?limit={limit}&offset={offset}`;
+const MAX_DISPLAY_POKEMONS = 10;
 
 const typeColors = {
   grass: "#78C850",
@@ -44,6 +45,24 @@ async function fetchDataJson() {
     showPokemon(data.results);
   } catch (error) {
     console.error("Fehler beim Abrufen der Pokemon-Daten:", error);
+  }
+}
+
+function filterAndShow() {
+  const searchInput = document.getElementById('searchInput').value.toLowerCase().trim();
+  if (searchInput.length >= 3) {
+    const filteredPokemons = storedPokemons.filter(pokemon =>
+      pokemon.name.toLowerCase().includes(searchInput)
+    );
+    document.querySelector(".content").innerHTML = "";
+    filteredPokemons.slice(0, MAX_DISPLAY_POKEMONS).forEach((pokemon, index) => {
+      document.querySelector(".content").innerHTML += generatePokemon(pokemon, index);
+    });
+  } else {
+    document.querySelector(".content").innerHTML = "";
+    storedPokemons.forEach((pokemon, index) => {
+      document.querySelector(".content").innerHTML += generatePokemon(pokemon, index);
+    });
   }
 }
 
@@ -159,7 +178,6 @@ function openCard(i) {
   arrows.classList.remove('d-none');
   overflow.classList.add('no-scroll');
 
-  // Sichtbarkeit der Pfeile anpassen
   if (currentIndex === 0) {
     arrowLeft.classList.add('d-none');
   } else {
@@ -210,3 +228,5 @@ function navigateCard(direction) {
     arrowRight.classList.remove('d-none');
   }
 }
+
+document.getElementById('searchInput').addEventListener('input', filterAndShow);
