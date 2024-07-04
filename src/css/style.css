@@ -1,6 +1,14 @@
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   background-color: rgba(0, 0, 0, 0.2);
   font-weight: 600;
+}
+
+.navbar {
+  width: 100vw;
 }
 
 .content {
@@ -39,6 +47,10 @@ body {
 
 .mt-15 {
   margin-top: 15px;
+}
+
+.mw-1920 {
+  max-width: 1920px;
 }
 
 .d-none {

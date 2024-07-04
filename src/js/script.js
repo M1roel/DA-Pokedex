@@ -123,7 +123,7 @@ function generatePokemon(pokemon, i) {
 }
 
 function loadMore() {
-  offset += 30;
+  offset += 40;
   fetchDataJson();
 }
 
