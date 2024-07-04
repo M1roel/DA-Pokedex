@@ -98,7 +98,7 @@ function generatePokemon(pokemon, i) {
 }
 
 function loadMore() {
-  limit += 20;
+  offset += 20;
   fetchDataJson()
 }
 
