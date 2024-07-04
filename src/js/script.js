@@ -48,9 +48,6 @@ async function fetchDataJson() {
 }
 
 async function showPokemon(pokemons) {
-  document.querySelector(".content").innerHTML = "";
-  storedPokemons = [];
-
   for (let i = 0; i < pokemons.length; i++) {
     const pokemon = pokemons[i];
     let pokemonDetails = await fetchPokemonDetails(pokemon.url);
@@ -102,7 +99,7 @@ function generatePokemon(pokemon, i) {
 
 function loadMore() {
   limit += 20;
-  init();
+  fetchDataJson()
 }
 
 function capitalizeFirstLetter(string) {
