@@ -1,9 +1,22 @@
-function updateArrowsVisibility(
-  currentIndex,
-  arrowLeft,
-  arrowRight,
-  totalPokemons
-) {
+function toggleOpenCardDisplay(openCardDiv, isVisible) {
+  const overflow = document.querySelector("body");
+  const arrows = document.querySelector(".arrows");
+
+  if (isVisible) {
+    openCardDiv.classList.remove("d-none");
+    arrows.classList.remove("d-none");
+    overflow.classList.add("no-scroll");
+  } else {
+    openCardDiv.classList.add("d-none");
+    arrows.classList.add("d-none");
+    overflow.classList.remove("no-scroll");
+  }
+}
+
+function updateArrowsVisibility(currentIndex, totalPokemons) {
+  const arrowLeft = document.querySelector(".arrow-left");
+  const arrowRight = document.querySelector(".arrow-right");
+
   if (currentIndex === 0) {
     arrowLeft.classList.add("d-none");
   } else {
@@ -16,6 +29,7 @@ function updateArrowsVisibility(
     arrowRight.classList.remove("d-none");
   }
 }
+
 
 function getSearchInput() {
   return document.getElementById("searchInput").value.toLowerCase().trim();

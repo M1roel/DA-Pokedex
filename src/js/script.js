@@ -92,10 +92,6 @@ function openCard(i) {
   currentIndex = i;
   const pokemon = storedPokemons[currentIndex];
   const openCardDiv = document.getElementById("open-card");
-  const overflow = document.querySelector("body");
-  const arrows = document.querySelector(".arrows");
-  const arrowLeft = document.querySelector(".arrow-left");
-  const arrowRight = document.querySelector(".arrow-right");
 
   const capitalizedPokemonName = capitalizeFirstLetter(pokemon.name);
   const statsHtml = generateStatsHtml(pokemon.stats);
@@ -108,13 +104,9 @@ function openCard(i) {
   const openCardContent = generateOpenCardContent(capitalizedPokemonName, typesHtml, flavorText, statsHtml, pokemon, backgroundColor);
 
   openCardDiv.innerHTML = openCardContent;
-  openCardDiv.classList.remove("d-none");
-  arrows.classList.remove("d-none");
-  overflow.classList.add("no-scroll");
-
-  updateArrowsVisibility(currentIndex, arrowLeft, arrowRight, storedPokemons.length);
+  toggleOpenCardDisplay(openCardDiv, true);
+  updateArrowsVisibility(currentIndex, storedPokemons.length);
 }
-
 
 function closeCard() {
   const openCardDiv = document.getElementById("open-card");
