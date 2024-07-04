@@ -99,13 +99,7 @@ function generatePokemon(pokemon, i) {
   const mainType = pokemon.types[0].type.name;
   const backgroundColor = typeColors[mainType] || "#FFF";
 
-  return `
-    <div class="card" style="width: 18rem; background-color: ${backgroundColor};" data-index="${i}" onclick="openCard(${i})">
-      <div class="pkmName mb-15">${capitalizedPokemonName}</div>
-      <div class="types mb-15">${typesHtml}</div>
-      <img class="card-img-top mb-15" src="${pokemon.sprites.other.dream_world.front_default}" alt="${pokemon.name}">
-    </div>
-  `;
+  return generatePokemonHtml(capitalizedPokemonName, typesHtml, pokemon, i, backgroundColor);
 }
 
 function loadMore() {
