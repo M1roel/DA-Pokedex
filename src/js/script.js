@@ -1,4 +1,4 @@
-let limit = 100;
+let limit = 40;
 let offset = 0;
 const BASE_URL_TEMPLATE = `https://pokeapi.co/api/v2/pokemon?limit={limit}&offset={offset}`;
 const MAX_DISPLAY_POKEMONS = 10;
