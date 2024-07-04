@@ -11,6 +11,10 @@ body {
   width: 100vw;
 }
 
+.container-fluid img {
+  height: 40px;
+}
+
 .content {
   display: flex;
   justify-content: center;
