@@ -1,32 +1,3 @@
-let limit = 40;
-let offset = 0;
-const BASE_URL_TEMPLATE = `https://pokeapi.co/api/v2/pokemon?limit={limit}&offset={offset}`;
-const MAX_DISPLAY_POKEMONS = 10;
-
-const typeColors = {
-  grass: "#78C850",
-  poison: "#A040A0",
-  fire: "#F08030",
-  flying: "#A890F0",
-  water: "#6890F0",
-  bug: "#A8B820",
-  normal: "#A8A878",
-  electric: "#F8D030",
-  ground: "#E0C068",
-  fairy: "#EE99AC",
-  fighting: "#C03028",
-  psychic: "#F85888",
-  rock: "#B8A038",
-  steel: "#B8B8D0",
-  ice: "#98D8D8",
-  ghost: "#705898",
-  dragon: "#7038F8",
-  dark: "#705848",
-};
-
-let storedPokemons = [];
-let currentIndex = 0;
-
 function init() {
   fetchDataJson();
 }
@@ -44,30 +15,40 @@ async function fetchDataJson() {
     let data = await response.json();
 
     showLoadingScreen();
-    
-    await showPokemon(data.results);
-    
-    stopLoadingScreen();
 
+    await showPokemon(data.results);
+
+    stopLoadingScreen();
   } catch (error) {
     console.error("Fehler beim Abrufen der Pokemon-Daten:", error);
   }
 }
 
 function filterAndShow() {
-  const searchInput = document.getElementById('searchInput').value.toLowerCase().trim();
+  const searchInput = document
+    .getElementById("searchInput")
+    .value.toLowerCase()
+    .trim();
   if (searchInput.length >= 3) {
-    const filteredPokemons = storedPokemons.filter(pokemon =>
+    const filteredPokemons = storedPokemons.filter((pokemon) =>
       pokemon.name.toLowerCase().includes(searchInput)
     );
     document.querySelector(".content").innerHTML = "";
-    filteredPokemons.slice(0, MAX_DISPLAY_POKEMONS).forEach((pokemon, index) => {
-      document.querySelector(".content").innerHTML += generatePokemon(pokemon, index);
-    });
+    filteredPokemons
+      .slice(0, MAX_DISPLAY_POKEMONS)
+      .forEach((pokemon, index) => {
+        document.querySelector(".content").innerHTML += generatePokemon(
+          pokemon,
+          index
+        );
+      });
   } else {
     document.querySelector(".content").innerHTML = "";
     storedPokemons.forEach((pokemon, index) => {
-      document.querySelector(".content").innerHTML += generatePokemon(pokemon, index);
+      document.querySelector(".content").innerHTML += generatePokemon(
+        pokemon,
+        index
+      );
     });
   }
 }
@@ -79,7 +60,10 @@ async function showPokemon(pokemons) {
     let speciesDetails = await fetchSpeciesDetails(pokemonDetails.species.url);
     pokemonDetails.speciesDetails = speciesDetails;
     storedPokemons.push(pokemonDetails);
-    document.querySelector(".content").innerHTML += generatePokemon(pokemonDetails, storedPokemons.length - 1);
+    document.querySelector(".content").innerHTML += generatePokemon(
+      pokemonDetails,
+      storedPokemons.length - 1
+    );
   }
 }
 
@@ -97,7 +81,9 @@ function getFlavorText(species, language) {
   let flavorTextEntry = species.flavor_text_entries.find(
     (entry) => entry.language.name === language
   );
-  return flavorTextEntry ? flavorTextEntry.flavor_text : "Keine Beschreibung verfügbar";
+  return flavorTextEntry
+    ? flavorTextEntry.flavor_text
+    : "Keine Beschreibung verfügbar";
 }
 
 function generatePokemon(pokemon, i) {
@@ -134,11 +120,11 @@ function capitalizeFirstLetter(string) {
 function openCard(i) {
   currentIndex = i;
   const pokemon = storedPokemons[currentIndex];
-  const openCardDiv = document.getElementById('open-card');
-  const overflow = document.querySelector('body');
-  const arrows = document.querySelector('.arrows');
-  const arrowLeft = document.querySelector('.arrow-left');
-  const arrowRight = document.querySelector('.arrow-right');
+  const openCardDiv = document.getElementById("open-card");
+  const overflow = document.querySelector("body");
+  const arrows = document.querySelector(".arrows");
+  const arrowLeft = document.querySelector(".arrow-left");
+  const arrowRight = document.querySelector(".arrow-right");
 
   const capitalizedPokemonName = capitalizeFirstLetter(pokemon.name);
   let statsHtml = "";
@@ -180,41 +166,41 @@ function openCard(i) {
   `;
 
   openCardDiv.innerHTML = openCardContent;
-  openCardDiv.classList.remove('d-none');
-  arrows.classList.remove('d-none');
-  overflow.classList.add('no-scroll');
+  openCardDiv.classList.remove("d-none");
+  arrows.classList.remove("d-none");
+  overflow.classList.add("no-scroll");
 
   if (currentIndex === 0) {
-    arrowLeft.classList.add('d-none');
+    arrowLeft.classList.add("d-none");
   } else {
-    arrowLeft.classList.remove('d-none');
+    arrowLeft.classList.remove("d-none");
   }
 
   if (currentIndex === storedPokemons.length - 1) {
-    arrowRight.classList.add('d-none');
+    arrowRight.classList.add("d-none");
   } else {
-    arrowRight.classList.remove('d-none');
+    arrowRight.classList.remove("d-none");
   }
 }
 
 function closeCard() {
-  const openCardDiv = document.getElementById('open-card');
-  const overflow = document.querySelector('body');
-  const arrows = document.querySelector('.arrows');
-  const arrowLeft = document.querySelector('.arrow-left');  
-  const arrowRight = document.querySelector('.arrow-right');
-  openCardDiv.classList.add('d-none');
-  arrows.classList.add('d-none');
-  overflow.classList.remove('no-scroll')
-  arrowLeft.classList.remove('d-none');
-  arrowRight.classList.remove('d-none');
-  openCardDiv.innerHTML = '';
+  const openCardDiv = document.getElementById("open-card");
+  const overflow = document.querySelector("body");
+  const arrows = document.querySelector(".arrows");
+  const arrowLeft = document.querySelector(".arrow-left");
+  const arrowRight = document.querySelector(".arrow-right");
+  openCardDiv.classList.add("d-none");
+  arrows.classList.add("d-none");
+  overflow.classList.remove("no-scroll");
+  arrowLeft.classList.remove("d-none");
+  arrowRight.classList.remove("d-none");
+  openCardDiv.innerHTML = "";
 }
 
 function navigateCard(direction) {
   currentIndex += direction;
-  const arrowLeft = document.querySelector('.arrow-left');
-  const arrowRight = document.querySelector('.arrow-right');
+  const arrowLeft = document.querySelector(".arrow-left");
+  const arrowRight = document.querySelector(".arrow-right");
   if (currentIndex < 0) {
     currentIndex = storedPokemons.length - 1;
   } else if (currentIndex >= storedPokemons.length) {
@@ -223,30 +209,30 @@ function navigateCard(direction) {
   openCard(currentIndex);
 
   if (currentIndex === 0) {
-    arrowLeft.classList.add('d-none');
+    arrowLeft.classList.add("d-none");
   } else {
-    arrowLeft.classList.remove('d-none');
+    arrowLeft.classList.remove("d-none");
   }
 
-  if (currentIndex == storedPokemons.length-1) {
-    arrowRight.classList.add('d-none');
+  if (currentIndex == storedPokemons.length - 1) {
+    arrowRight.classList.add("d-none");
   } else {
-    arrowRight.classList.remove('d-none');
+    arrowRight.classList.remove("d-none");
   }
 }
 
 function showLoadingScreen() {
-  document.getElementById('pokeballIcon').classList.add('pokeball-icon');
-  document.querySelector('.content').classList.add('d-none');
-  document.querySelector('.load-more-btn').classList.add('d-none');
-  document.querySelector('.loadingScreen').classList.remove('d-none');
+  document.getElementById("pokeballIcon").classList.add("pokeball-icon");
+  document.querySelector(".content").classList.add("d-none");
+  document.querySelector(".load-more-btn").classList.add("d-none");
+  document.querySelector(".loadingScreen").classList.remove("d-none");
 }
 
 function stopLoadingScreen() {
-  document.getElementById('pokeballIcon').classList.remove('pokeball-icon');
-  document.querySelector('.content').classList.remove('d-none');
-  document.querySelector('.load-more-btn').classList.remove('d-none');
-  document.querySelector('.loadingScreen').classList.add('d-none');
+  document.getElementById("pokeballIcon").classList.remove("pokeball-icon");
+  document.querySelector(".content").classList.remove("d-none");
+  document.querySelector(".load-more-btn").classList.remove("d-none");
+  document.querySelector(".loadingScreen").classList.add("d-none");
 }
 
-document.getElementById('searchInput').addEventListener('input', filterAndShow);
+document.getElementById("searchInput").addEventListener("input", filterAndShow);
