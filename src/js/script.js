@@ -54,7 +54,7 @@ async function showPokemon(pokemons) {
     let speciesDetails = await fetchSpeciesDetails(pokemonDetails.species.url);
     pokemonDetails.speciesDetails = speciesDetails;
     storedPokemons.push(pokemonDetails);
-    document.querySelector(".content").innerHTML += generatePokemon(pokemonDetails, i);
+    document.querySelector(".content").innerHTML += generatePokemon(pokemonDetails, storedPokemons.length - 1);
   }
 }
 
@@ -99,7 +99,7 @@ function generatePokemon(pokemon, i) {
 
 function loadMore() {
   offset += 20;
-  fetchDataJson()
+  fetchDataJson();
 }
 
 function capitalizeFirstLetter(string) {
