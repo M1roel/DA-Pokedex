@@ -1,4 +1,4 @@
-let limit = 20;
+let limit = 200;
 let offset = 0;
 const BASE_URL_TEMPLATE = `https://pokeapi.co/api/v2/pokemon?limit={limit}&offset={offset}`;
 const MAX_DISPLAY_POKEMONS = 10;
@@ -42,7 +42,13 @@ async function fetchDataJson() {
   try {
     let response = await fetch(getBaseUrl());
     let data = await response.json();
-    showPokemon(data.results);
+
+    showLoadingScreen();
+    
+    await showPokemon(data.results);
+    
+    stopLoadingScreen();
+
   } catch (error) {
     console.error("Fehler beim Abrufen der Pokemon-Daten:", error);
   }
@@ -227,6 +233,18 @@ function navigateCard(direction) {
   } else {
     arrowRight.classList.remove('d-none');
   }
+}
+
+function showLoadingScreen() {
+  document.getElementById('pokeballIcon').classList.add('pokeball-icon');
+  document.querySelector('.content').classList.add('d-none');
+  document.querySelector('.loadingScreen').classList.remove('d-none');
+}
+
+function stopLoadingScreen() {
+  document.getElementById('pokeballIcon').classList.remove('pokeball-icon');
+  document.querySelector('.content').classList.remove('d-none');
+  document.querySelector('.loadingScreen').classList.add('d-none');
 }
 
 document.getElementById('searchInput').addEventListener('input', filterAndShow);

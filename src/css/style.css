@@ -98,3 +98,40 @@ body {
 .arrow-right {
   right: 10px;
 }
+
+@keyframes pokeballAnimation {
+  0%, 100% {
+    background-image: url('/public/img/001.png');
+  }
+  14.29% {
+    background-image: url('/public/img/002.png');
+  }
+  28.57% {
+    background-image: url('/public/img/003.png');
+  }
+  42.86% {
+    background-image: url('/public/img/004.png');
+  }
+  57.14% {
+    background-image: url('/public/img/005.png');
+  }
+  71.43% {
+    background-image: url('/public/img/006.png');
+  }
+  85.71% {
+    background-image: url('/public/img/007.png');
+  }
+}
+
+.loadingScreen {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pokeball-icon {
+    animation: pokeballAnimation 2.8s steps(7) infinite;
+  width: auto;
+  height: auto;
+}
