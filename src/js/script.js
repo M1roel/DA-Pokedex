@@ -25,31 +25,15 @@ async function fetchDataJson() {
 }
 
 function filterAndShow() {
-  const searchInput = document
-    .getElementById("searchInput")
-    .value.toLowerCase()
-    .trim();
+  const searchInput = getSearchInput();
+  const contentDiv = document.querySelector(".content");
+  contentDiv.innerHTML = "";
+
   if (searchInput.length >= 3) {
-    const filteredPokemons = storedPokemons.filter((pokemon) =>
-      pokemon.name.toLowerCase().includes(searchInput)
-    );
-    document.querySelector(".content").innerHTML = "";
-    filteredPokemons
-      .slice(0, MAX_DISPLAY_POKEMONS)
-      .forEach((pokemon, index) => {
-        document.querySelector(".content").innerHTML += generatePokemon(
-          pokemon,
-          index
-        );
-      });
+    const filteredPokemons = filterPokemonsByName(searchInput);
+    displayPokemons(filteredPokemons, contentDiv);
   } else {
-    document.querySelector(".content").innerHTML = "";
-    storedPokemons.forEach((pokemon, index) => {
-      document.querySelector(".content").innerHTML += generatePokemon(
-        pokemon,
-        index
-      );
-    });
+    displayPokemons(storedPokemons, contentDiv);
   }
 }
 
