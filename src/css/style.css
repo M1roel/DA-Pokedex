@@ -90,7 +90,7 @@ body {
 .arrow-left,
 .arrow-right {
   position: fixed;
-  top: 50%;
+  top: 95%;
   transform: translateY(-50%);
   cursor: pointer;
   z-index: 100;
@@ -104,11 +104,11 @@ body {
 }
 
 .arrow-left {
-  left: 5%;
+  left: 40%;
 }
 
 .arrow-right {
-  right: 5%;
+  right: 40%;
 }
 
 @keyframes pokeballAnimation {
