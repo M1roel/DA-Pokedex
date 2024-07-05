@@ -67,33 +67,31 @@ function capitalizeFirstLetter(string) {
 function openCard(i) {
   currentIndex = i;
   const pokemon = storedPokemons[currentIndex];
-
   const capitalizedPokemonName = capitalizeFirstLetter(pokemon.name);
   const statsHtml = generateStatsHtml(pokemon.stats);
   const typesHtml = generateTypesHtml(pokemon.types);
   const flavorText = getFlavorText(pokemon.speciesDetails, "de");
   const mainType = pokemon.types[0].type.name;
   const backgroundColor = typeColors[mainType] || "#FFF";
-
-  const openCardContent = generateOpenCardContent(
-    capitalizedPokemonName,
-    typesHtml,
-    flavorText,
-    statsHtml,
-    pokemon,
-    backgroundColor
-  );
-
-  openCardDiv.innerHTML = openCardContent;
+  const openCardContent = generateOpenCardContent(capitalizedPokemonName, typesHtml, flavorText, statsHtml, pokemon, backgroundColor);
+  updateOpenCard(openCardContent);
   toggleOpenCardDisplay(true);
   updateArrowsVisibility(currentIndex, storedPokemons.length);
+}
 
-  document.querySelector('.arrow-left').addEventListener('click', function(event) {
+function updateOpenCard(content) {
+  const openCardDiv = document.querySelector('.open-card');
+  openCardDiv.innerHTML = content;
+
+  const arrowLeft = document.querySelector('.arrow-left');
+  const arrowRight = document.querySelector('.arrow-right');
+
+  arrowLeft.addEventListener('click', function(event) {
     event.stopPropagation();
     navigateCard(-1);
   });
 
-  document.querySelector('.arrow-right').addEventListener('click', function(event) {
+  arrowRight.addEventListener('click', function(event) {
     event.stopPropagation();
     navigateCard(1);
   });
