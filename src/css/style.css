@@ -5,12 +5,26 @@ body {
   flex-direction: column;
   background-color: rgba(0, 0, 0, 0.2);
   font-weight: 600;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
 .navbar {
-  width: 100vw;
   display: flex;
   justify-content: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.container-fluid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100vw;
+  margin: 0;
+  padding: 0 15px;
 }
 
 .container-fluid img {
@@ -22,6 +36,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 .card {
