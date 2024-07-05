@@ -87,6 +87,16 @@ function openCard(i) {
   openCardDiv.innerHTML = openCardContent;
   toggleOpenCardDisplay(true);
   updateArrowsVisibility(currentIndex, storedPokemons.length);
+
+  document.querySelector('.arrow-left').addEventListener('click', function(event) {
+    event.stopPropagation();
+    navigateCard(-1);
+  });
+
+  document.querySelector('.arrow-right').addEventListener('click', function(event) {
+    event.stopPropagation();
+    navigateCard(1);
+  });
 }
 
 function closeCard() {

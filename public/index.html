@@ -14,21 +14,21 @@
     <title>Pokedex</title>
   </head>
   <body onload="init()">
-      <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid mw-1920">
-          <a class="navbar-brand" href="#">Pokedex</a>
-          <img src="/public/img/pokedex.png" alt="pokedex icon">
-          <form class="d-flex" role="search">
-            <input
-              id="searchInput"
-              class="form-control me-2"
-              type="search"
-              placeholder="Suchen"
-              aria-label="Search"
-            />
-          </form>
-        </div>
-      </nav>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid mw-1920">
+        <a class="navbar-brand" href="#">Pokedex</a>
+        <img src="/public/img/pokedex.png" alt="pokedex icon" />
+        <form class="d-flex" role="search">
+          <input
+            id="searchInput"
+            class="form-control me-2"
+            type="search"
+            placeholder="Suchen"
+            aria-label="Search"
+          />
+        </form>
+      </div>
+    </nav>
 
     <div class="content mt-15 mw-1920"></div>
 
@@ -41,17 +41,7 @@
       />
     </div>
 
-    <div class="single-card">
-      <div class="open-card d-none" id="open-card" onclick="closeCard()"></div>
-      <div class="arrows d-none">
-        <div class="arrow-left" onclick="navigateCard(-1)">
-          <img src="img/arrow-left.png" alt="leftArrow" />
-        </div>
-        <div class="arrow-right" onclick="navigateCard(1)">
-          <img src="img/arrow-right.png" alt="rightArrow" />
-        </div>
-      </div>
-    </div>
+    <div class="open-card d-none" id="open-card" onclick="closeCard()"></div>
 
     <div class="load-more-btn mt-15 mb-15">
       <button onclick="loadMore()" class="btn btn-primary">Mehr Laden</button>

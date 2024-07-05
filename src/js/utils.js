@@ -17,16 +17,18 @@ function updateArrowsVisibility(currentIndex, totalPokemons) {
   const arrowLeft = document.querySelector(".arrow-left");
   const arrowRight = document.querySelector(".arrow-right");
 
-  if (currentIndex === 0) {
-    arrowLeft.classList.add("d-none");
-  } else {
-    arrowLeft.classList.remove("d-none");
-  }
+  if (arrowLeft && arrowRight) {
+    if (currentIndex === 0) {
+      arrowLeft.classList.add("d-none");
+    } else {
+      arrowLeft.classList.remove("d-none");
+    }
 
-  if (currentIndex === totalPokemons - 1) {
-    arrowRight.classList.add("d-none");
-  } else {
-    arrowRight.classList.remove("d-none");
+    if (currentIndex === totalPokemons - 1) {
+      arrowRight.classList.add("d-none");
+    } else {
+      arrowRight.classList.remove("d-none");
+    }
   }
 }
 
@@ -40,7 +42,6 @@ function toggleElement(element, className, add) {
 
 function toggleOpenCardDisplay(isVisible) {
   toggleElement(openCardDiv, "d-none", !isVisible);
-  toggleElement(arrows, "d-none", !isVisible);
   toggleElement(body, "no-scroll", isVisible);
 }
 

@@ -41,15 +41,12 @@ function generateStatsHtml(stats) {
   return statsHtml;
 }
 
-function generateOpenCardContent(
-  capitalizedPokemonName,
-  typesHtml,
-  flavorText,
-  statsHtml,
-  pokemon,
-  backgroundColor
-) {
+function generateOpenCardContent(capitalizedPokemonName, typesHtml, flavorText, statsHtml, pokemon, backgroundColor) {
   return `
+    <div class="open-card-content" style="position: relative;">
+      <div class="arrow-left">
+        <img src="img/arrow-left.png" alt="leftArrow" />
+      </div>
       <div class="card" style="width: 18rem; background-color: ${backgroundColor};">
         <div class="pkmName mb-15">${capitalizedPokemonName}</div>
         <div class="types mb-15">${typesHtml}</div>
@@ -59,5 +56,9 @@ function generateOpenCardContent(
           ${statsHtml}
         </div>
       </div>
-    `;
+      <div class="arrow-right">
+        <img src="img/arrow-right.png" alt="rightArrow" />
+      </div>
+    </div>
+  `;
 }

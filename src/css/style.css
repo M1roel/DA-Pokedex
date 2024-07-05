@@ -42,6 +42,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
   height: auto;
   margin: 5px;
   cursor: pointer;
@@ -107,6 +108,13 @@ body {
   color: #fff;
 }
 
+.open-card-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
 .load-more-btn {
   display: flex;
   justify-content: center;
@@ -121,11 +129,18 @@ body {
 
 .arrow-left,
 .arrow-right {
-  position: fixed;
+  position: absolute;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
-  z-index: 100;
+}
+
+.arrow-left {
+  left: -50px;
+}
+
+.arrow-right {
+  right: -50px;
 }
 
 .arrow-left img,
@@ -133,14 +148,6 @@ body {
   height: 40px;
   width: 40px;
   cursor: pointer;
-}
-
-.arrow-left {
-  left: 0;
-}
-
-.arrow-right {
-  right: 0;
 }
 
 @keyframes pokeballAnimation {
