@@ -30,23 +30,6 @@ function updateArrowsVisibility(currentIndex, totalPokemons) {
   }
 }
 
-function getSearchInput() {
-  return document.getElementById("searchInput").value.toLowerCase().trim();
-}
-
-function filterPokemonsByName(searchInput) {
-  return storedPokemons.filter((pokemon) =>
-    pokemon.name.toLowerCase().includes(searchInput)
-  );
-}
-
-function displayPokemons(pokemons, contentDiv) {
-  pokemons.slice(0, MAX_DISPLAY_POKEMONS).forEach((pokemon, index) => {
-    const originalIndex = storedPokemons.indexOf(pokemon);
-    contentDiv.innerHTML += generatePokemon(pokemon, originalIndex);
-  });
-}
-
 function toggleElement(element, className, add) {
   if (add) {
     element.classList.add(className);
@@ -61,14 +44,28 @@ function toggleOpenCardDisplay(isVisible) {
   toggleElement(body, "no-scroll", isVisible);
 }
 
-function filterAndShow(searchInputElem) {
-  const searchInput = searchInputElem.value.toLowerCase().trim();
+function filterAndShow() {
+  const searchInput = getSearchInput();
   contentDiv.innerHTML = "";
-
   if (searchInput.length >= 3) {
     const filteredPokemons = filterPokemonsByName(searchInput);
-    displayPokemons(filteredPokemons, contentDiv);
+    displayPokemons(filteredPokemons.slice(0, MAX_DISPLAY_POKEMONS), contentDiv);
   } else {
     displayPokemons(storedPokemons, contentDiv);
   }
+}
+
+function getSearchInput() {
+  return document.getElementById("searchInput").value.toLowerCase().trim();
+}
+
+function filterPokemonsByName(searchInput) {
+  return storedPokemons.filter(pokemon => pokemon.name.toLowerCase().includes(searchInput));
+}
+
+function displayPokemons(pokemons, contentDiv) {
+  pokemons.forEach((pokemon, index) => {
+    const originalIndex = storedPokemons.indexOf(pokemon);
+    contentDiv.innerHTML += generatePokemon(pokemon, originalIndex);
+  });
 }
