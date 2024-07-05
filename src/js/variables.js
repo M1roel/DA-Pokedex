@@ -1,4 +1,4 @@
-let limit = 30;
+let limit = 20;
 let offset = 0;
 let storedPokemons = [];
 let currentIndex = 0;
