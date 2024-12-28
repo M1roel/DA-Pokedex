@@ -13,7 +13,7 @@ function generateTypesHtml(types) {
   for (const type of types) {
     const typeUrl = type.type.url;
     const typeId = typeUrl.split("/").filter(Boolean).pop();
-    typesHtml += `<img src="./img/${typeId}.png" alt="${type.type.name}" class="type-icon">`;
+    typesHtml += `<img src="/public/img/${typeId}.png" alt="${type.type.name}" class="type-icon">`;
   }
   return typesHtml;
 }
@@ -39,7 +39,7 @@ function generateOpenCardContent(capitalizedPokemonName, typesHtml, flavorText, 
   return `
     <div class="open-card-content" style="position: relative;">
       <div class="arrow-left">
-        <img src="img/arrow-left.png" alt="leftArrow" />
+        <img src="/public/img/arrow-left.png" alt="leftArrow" />
       </div>
       <div class="card" style="width: 18rem; background-color: ${backgroundColor};">
         <div class="pkmName mb-15">${capitalizedPokemonName}</div>
@@ -51,7 +51,7 @@ function generateOpenCardContent(capitalizedPokemonName, typesHtml, flavorText, 
         </div>
       </div>
       <div class="arrow-right">
-        <img src="img/arrow-right.png" alt="rightArrow" />
+        <img src="/public/img/arrow-right.png" alt="rightArrow" />
       </div>
     </div>
   `;
